@@ -1,0 +1,76 @@
+//android{
+//	compileSdkVersion 21
+//	...
+//}
+
+//run-> gradle jarrelease javadocrelease
+android.libraryVariants.all { variant ->
+    task("generate${variant.name}Javadoc", type: Javadoc) {
+        description "Generates Javadoc for $variant.name."
+        source = variant.javaCompile.source
+        ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+
+        //android
+        exclude "**/R.java"
+
+        //other
+        exclude '**/demo/**'
+    }
+
+    task("javadoc${variant.name}", type: Jar) {
+        classifier = "javadoc"
+        description "Bundles Javadoc into a JAR file for $variant.name."
+        from tasks["generate${variant.name}Javadoc"]
+
+    }
+
+    task("jar${variant.name}", type: Jar) {
+        description "Bundles compiled .class files into a JAR file for $variant.name."
+        dependsOn variant.javaCompile
+        from variant.javaCompile.destinationDir
+        exclude '**/R.class', '**/R$*.class', '**/R.html', '**/R.*.html','BuildConfig.class'
+        exclude '**/test/'
+    }
+}
+
+// or
+//run-> gradle myJavadoc
+task myJavadoc(type: Javadoc) {
+
+	def otherSource=new File(otherIncludeSource)
+	source =['src']+otherSource
+
+	ArrayList<File> classPath = new ArrayList<File>()
+	classPath.add(file("${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"))
+	classPath.add(file("libs/android-support-v4.jar"))
+
+	options.classpath(classPath)
+	options.setEncoding("UTF-8")
+	options.showFromPublic()
+	options.quiet()
+	options.links("http://docs.oracle.com/javase/7/docs/api/");
+	options.links("http://d.android.com/reference/");
+
+	failOnError = false
+
+	//exclude
+	exclude '**/*Test.java'
+	
+	//delete 'docs/api/**'
+	doLast{
+		copy{
+			from("build/docs/javadoc")
+			into("outputs/docs/api")
+		}
+	}
+}
+
+task cleardoc(type: Delete){
+	delete fileTree(dir: 'build/docs/javadoc')
+	delete fileTree(dir: 'outputs/docs/api')
+}
+myJavadoc.dependsOn(cleardoc)
+
+
+
