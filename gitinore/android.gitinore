@@ -15,6 +15,7 @@
 
 # Logs and databases
 *.log
+*.bak
 
 # OS generated files
 .DS_Store*
