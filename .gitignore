@@ -32,6 +32,7 @@ Thumbs.db
 target/
 build/
 /*/build/
+gen-external-apklibs/
 
 # AndroidStudio specific files/directories
 local.properties

@@ -16,6 +16,8 @@ public class HelloActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hello_layout);
+
+        System.out.println("onCreate "+getString(R.string.app_name));
     }
 
     @Override

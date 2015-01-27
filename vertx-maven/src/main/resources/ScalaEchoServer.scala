@@ -1,5 +1,3 @@
-package org.example.vertx.maven
-
 import org.vertx.scala.core.net.NetSocket
 import org.vertx.scala.core.streams.Pump
 import org.vertx.scala.platform.Verticle

@@ -14,7 +14,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <android.run.debug>true</android.run.debug>
+        <android.run.debug>false</android.run.debug>
         <android.version>4.1.1.4</android.version>
         <joda-time.version>2.6</joda-time.version>
         <compatibility-v7-appcompat.version>21.0.3</compatibility-v7-appcompat.version>
@@ -39,15 +39,51 @@
             <version>${joda-time.version}</version>
         </dependency>
 
+
+        <!--<dependency>-->
+            <!--<groupId>com.android.support</groupId>-->
+            <!--<artifactId>support-v4</artifactId>-->
+            <!--<version>${compatibility-v4.version}</version>-->
+            <!--<type>aar</type>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.android.support</groupId>-->
+            <!--<artifactId>appcompat-v7</artifactId>-->
+            <!--<version>${compatibility-v7-appcompat.version}</version>-->
+            <!--<type>aar</type>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.android.support</groupId>-->
+            <!--<artifactId>support-v4</artifactId>-->
+            <!--<version>21.0.3</version>-->
+            <!--<type>aar</type>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>android.support</groupId>
             <artifactId>compatibility-v7-appcompat</artifactId>
-            <version>${compatibility-v7-appcompat.version}</version>
+            <version>21.0.3</version>
+            <type>apklib</type>
         </dependency>
+
+        <dependency>
+            <groupId>android.support</groupId>
+            <artifactId>compatibility-v7-appcompat</artifactId>
+            <version>21.0.3</version>
+            <type>jar</type>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>android.support</groupId>-->
+            <!--<artifactId>compatibility-v4</artifactId>-->
+            <!--<version>21.0.3</version>-->
+            <!--<type>apklib</type>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>android.support</groupId>
             <artifactId>compatibility-v4</artifactId>
-            <version>${compatibility-v4.version}</version>
+            <version>21.0.3</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 
