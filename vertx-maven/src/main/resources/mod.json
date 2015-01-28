@@ -2,7 +2,8 @@
 
   // Java verticle
 //  "main":"org.example.vertx.maven.PingVerticle",
-    "main":"org.example.vertx.maven.HelloVerticle",
+//    "main":"org.example.vertx.maven.HelloVerticle",
+  "main":"org.example.vertx.maven.VrmVerticle",
 
   // In this example we also provide various other versions of the main verticle, you can uncomment this and
   // play around:

@@ -42,6 +42,10 @@
         <vertx.lang-groovy.version>2.1.1-final</vertx.lang-groovy.version>
         <vertx.lang-scala.version>1.1.0-M1</vertx.lang-scala.version>
 
+        <!--Other Dependencies-->
+        <mongo-java-driver.version>2.12.4</mongo-java-driver.version>
+        <rxjava-core.version>0.20.7</rxjava-core.version>
+
         <!--Plugin versions-->
         <maven.compiler.plugin.version>3.0</maven.compiler.plugin.version>
         <maven.resources.plugin.version>2.6</maven.resources.plugin.version>
@@ -117,6 +121,30 @@
         </dependency>
         -->
 
+        <!--<dependency>-->
+            <!--<groupId>org.mongodb</groupId>-->
+            <!--<artifactId>mongo-java-driver</artifactId>-->
+            <!--<version>${mongo-java-driver.version}</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.netflix.rxjava</groupId>-->
+            <!--<artifactId>rxjava-core</artifactId>-->
+            <!--<version>${rxjava-core.version}</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>mod-mongo-persistor</artifactId>
+            <version>2.1.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>mod-rxvertx</artifactId>
+            <version>1.0.0-beta4</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -135,6 +163,9 @@
                    <classpath>src/main/resources/:src/test/resources/:target/classes/:target/test-classes/</classpath>
                 </configuration>
                 -->
+                <configuration>
+                    <configFile>src/main/resources/config.json</configFile>
+                </configuration>
                 <!-- Make sure that the plugin uses the vert.x versions from this pom.xml not from its own pom.xml -->
                 <dependencies>
                     <dependency>
@@ -161,6 +192,12 @@
                         <groupId>io.vertx</groupId>
                         <artifactId>lang-scala_2.11</artifactId>
                         <version>${vertx.lang-scala.version}</version>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>io.vertx</groupId>
+                        <artifactId>mod-rxvertx</artifactId>
+                        <version>1.0.0-beta4</version>
                     </dependency>
 
                 </dependencies>
