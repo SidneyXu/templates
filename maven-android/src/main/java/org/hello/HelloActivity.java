@@ -1,8 +1,10 @@
 package org.hello;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.appcompat.R;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import org.joda.time.LocalTime;
 
@@ -18,6 +20,14 @@ public class HelloActivity extends ActionBarActivity {
         setContentView(R.layout.hello_layout);
 
         System.out.println("onCreate "+getString(R.string.app_name));
+
+        System.out.println(3);
+
+        Log.i("myapp" , "onCreate "+getString(R.string.app_name));
+
+        Log.i("myapp" , "3");
+
+//        Button button=findViewById(R.id.button1);
     }
 
     @Override

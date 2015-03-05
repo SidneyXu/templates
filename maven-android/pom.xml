@@ -39,25 +39,6 @@
             <version>${joda-time.version}</version>
         </dependency>
 
-
-        <!--<dependency>-->
-            <!--<groupId>com.android.support</groupId>-->
-            <!--<artifactId>support-v4</artifactId>-->
-            <!--<version>${compatibility-v4.version}</version>-->
-            <!--<type>aar</type>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.android.support</groupId>-->
-            <!--<artifactId>appcompat-v7</artifactId>-->
-            <!--<version>${compatibility-v7-appcompat.version}</version>-->
-            <!--<type>aar</type>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.android.support</groupId>-->
-            <!--<artifactId>support-v4</artifactId>-->
-            <!--<version>21.0.3</version>-->
-            <!--<type>aar</type>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>android.support</groupId>
             <artifactId>compatibility-v7-appcompat</artifactId>
@@ -71,13 +52,6 @@
             <version>21.0.3</version>
             <type>jar</type>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>android.support</groupId>-->
-            <!--<artifactId>compatibility-v4</artifactId>-->
-            <!--<version>21.0.3</version>-->
-            <!--<type>apklib</type>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>android.support</groupId>
