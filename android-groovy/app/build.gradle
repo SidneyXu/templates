@@ -1,0 +1,67 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.1.1'
+    }
+}
+apply plugin: 'com.android.application'
+
+apply plugin: 'groovyx.grooid.groovy-android'
+
+repositories {
+    jcenter()
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "org.example.groovyandroid"
+        minSdkVersion 9
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:21.0.3'
+
+    compile 'org.codehaus.groovy:groovy:2.4.1:grooid'
+    compile ('org.codehaus.groovy:groovy-json:2.4.1'){
+        transitive =false
+    }
+}
+
+// add support for Groovy to existing configurations
+//android.applicationVariants.all {
+//    task "groovy${name}Compile"(type: GroovyCompile) {
+//        source = javaCompile.source + fileTree('src/main/java').include('**/*.groovy')
+//        destinationDir = javaCompile.destinationDir
+//        classpath = javaCompile.classpath
+//        groovyClasspath = classpath
+//        sourceCompatibility = '1.6'
+//        targetCompatibility = '1.6'
+//        doFirst {
+//            def runtimeJars = plugins.findPlugin(com.android.build.gradle.AppPlugin).runtimeJars
+//            classpath = files(runtimeJars) + classpath
+//        }
+//    }
+//    javaCompile.dependsOn("groovy${name}Compile")
+//    javaCompile.enabled = false
+//}
