@@ -1,5 +1,32 @@
 apply plugin: 'java'
 
+[compileJava, compileTestJava, javadoc]*.options.encoding = "utf-8"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = "com.example"
+            pom.artifactId = "java-lib"
+            pom.version = "1.0.1-SNAPSHOT"
+            repository(url: "http://127.0.0.1:8081/nexus/content/repositories/snapshots/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+        }
+    }
+}
+
+javadoc {
+    description "Bundles Javadoc into a JAR file for ${name}."
+    exclude '**/Cat.class'
+    options.encoding = "utf-8"
+}
+
+jar {
+    description "Bundles compiled .class files into a JAR file for ${name}."
+    exclude '**/R.class', '**/R$*.class', '**/R.html', '**/R.*.html', 'BuildConfig.class'
+    exclude '**/Cat.class'
+}
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
 }

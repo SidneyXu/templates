@@ -1,1 +1,1 @@
-include ':example-paraent', ':example-android-lib', ':example-java-lib', ':MyApplication'
+include  ':example-android-lib', ':example-java-lib', ':MyApplication'
