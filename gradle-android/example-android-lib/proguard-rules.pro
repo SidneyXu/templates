@@ -15,3 +15,19 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+#-injars ../build/
+#-outjars ../deploy/core-v0.5.jar
+#-libraryjars
+
+-dontshrink
+
+#-dontoptimize
+#-dontskipnonpubliclibraryclassmembers
+#-optimizations !code/simplification/arithmetic
+#-allowaccessmodification
+#-repackageclasses ''
+#-keepattributes SourceFile,LineNumberTable,*Annotation*,Signature,Exceptions,Deprecated,InnerClasses
+#-renamesourcefileattribute SourceFile
+#-dontpreverify
+#-dontnote com.android.vending.licensing.ILicensingService
+#-dontwarn android.support.**

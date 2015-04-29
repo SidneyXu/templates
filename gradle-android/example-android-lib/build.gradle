@@ -16,23 +16,60 @@ android {
     }
 }
 
-task("upload", dependsOn: "build"){
-
-}
-
 uploadArchives {
 
-    repositories.mavenDeployer {
-        name = 'mavenCentralReleaseDeployer'
-        snapshotRepository(url: "http://127.0.0.1:8081/nexus/content/repositories/snapshots/") {
-            authentication(userName: "admin", password: "admin123")
+    repositories {
+        mavenDeployer {
+
+            //test start
+//        beforeDeployment { MavenDeployment deployment->
+//            signing.signPom(deployment)
+//        }
+
+            //test end
+            //then can use project.ext.username
+
+            name = 'mavenCentralReleaseDeployer'
+            snapshotRepository(url: "http://127.0.0.1:8081/nexus/content/repositories/snapshots/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.version = "1.0.1-SNAPSHOT"
+            pom.artifactId = "android-lib"
+            pom.groupId = "com.example"
+            pom.name = "android lib example"
+            pom.packaging = 'aar'
+
+            //start
+//        pom.project{
+//            name 'aa'
+//            description ''
+//            url ''
+//            inceptionYear '2015'
+//
+//            licenses{
+//                license{
+//                    name 'The Apache Software License, Version 2.0'
+//                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                    distribution 'repo'
+//                }
+//            }
+//
+//            scm{
+//                url "https://android.googlesource.com/platform/tools/build"
+//                connection "git://android.googlesource.com/platform/tools/build.git"
+//            }
+//
+//            developers {
+//                developer {
+//                    name 'The Android Open Source Project'
+//                }
+//            }
+//        }
+
+            //end
         }
-        pom.version = "1.0.1-SNAPSHOT"
-        pom.artifactId = "android-lib"
-        pom.groupId = "com.example"
-        pom.name = "android lib example"
-        pom.packaging = 'aar'
     }
+
 }
 
 android.libraryVariants.all { variant ->
@@ -60,7 +97,7 @@ android.libraryVariants.all { variant ->
         description "Bundles compiled .class files into a JAR file for $variant.name."
         dependsOn variant.javaCompile
         from variant.javaCompile.destinationDir
-        exclude '**/R.class', '**/R$*.class', '**/R.html', '**/R.*.html','BuildConfig.class'
+        exclude '**/R.class', '**/R$*.class', '**/R.html', '**/R.*.html', 'BuildConfig.class'
         exclude '**/test/'
     }
 }
@@ -68,7 +105,17 @@ android.libraryVariants.all { variant ->
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.example:java-lib:1.0.1-SNAPSHOT'
+
+    compile project(":example-java-lib")
+}
+
+//test
+if (project.hasProperty("secure.properties")
+        && new File(project.property("secure.properties")).exists()) {
+
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(project.property("secure.properties"))))
+
 }
 
 
@@ -86,9 +133,9 @@ publishing {
 
         maven(MavenPublication) {
             artifacts {
-                groupId 'com.android'
-                artifactId 'mymy'
-                version '1.0-SNAPSHOT'
+                groupId 'com.example'
+                artifactId 'android-lib'
+                version '1.0.1-SNAPSHOT'
                 artifact 'build/outputs/aar/example-android-lib-release.aar'
             }
         }
@@ -96,3 +143,20 @@ publishing {
     //snapshot only allow published version name contains snapshot
 
 }
+
+//test
+// add javadoc/source jar tasks as artifacts
+//artifacts {
+//    archives jar
+//    archives sourcesJar
+//    archives javadocJar
+//}
+artifacts {
+    //archives packageReleaseJar
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}
+//signing {
+//   required { project.has("release") && gradle.taskGraph.hasTask("uploadArchives") }
+//  sign configurations.archives
+//}

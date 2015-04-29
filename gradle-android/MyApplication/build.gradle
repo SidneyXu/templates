@@ -71,7 +71,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
 
-    compile 'com.example:android-lib:1.0.1-SNAPSHOT@aar'
+    compile project(":example-android-lib")
 
     //65535
     compile 'com.android.support:multidex:1.0.0'
