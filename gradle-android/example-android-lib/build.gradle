@@ -29,44 +29,48 @@ uploadArchives {
             //test end
             //then can use project.ext.username
 
-            name = 'mavenCentralReleaseDeployer'
             snapshotRepository(url: "http://127.0.0.1:8081/nexus/content/repositories/snapshots/") {
                 authentication(userName: "admin", password: "admin123")
             }
+            repository(url: "http://") {
+                authentication(userName: "admin", password: "admin123")
+            }
+
             pom.version = "1.0.1-SNAPSHOT"
             pom.artifactId = "android-lib"
             pom.groupId = "com.example"
             pom.name = "android lib example"
             pom.packaging = 'aar'
 
-            //start
-//        pom.project{
-//            name 'aa'
-//            description ''
-//            url ''
-//            inceptionYear '2015'
-//
-//            licenses{
-//                license{
-//                    name 'The Apache Software License, Version 2.0'
-//                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    distribution 'repo'
-//                }
-//            }
-//
-//            scm{
-//                url "https://android.googlesource.com/platform/tools/build"
-//                connection "git://android.googlesource.com/platform/tools/build.git"
-//            }
-//
-//            developers {
-//                developer {
-//                    name 'The Android Open Source Project'
-//                }
-//            }
-//        }
+            pom.project {
+                name POM_NAME
+                description POM_DESCRIPTION
+                packaging POM_PACKAGING
 
-            //end
+//                url 'https://github.com/survivingwithandroid/WeatherLib#sthash.1uutKRow.dpuf'
+
+                inceptionYear POM_INCEPTION_YEAR
+
+                licenses {
+                    license {
+                        name POM_LICENCE_NAME
+                        url POM_LICENCE_URL
+                        distribution POM_LICENCE_DIST
+                    }
+                }
+
+                scm {
+                    url "https://android.googlesource.com/platform/tools/build"
+                    connection "git://android.googlesource.com/platform/tools/build.git"
+                }
+
+                developers {
+                    developer {
+                        name 'The Android Open Source Project'
+                    }
+                }
+            }
+
         }
     }
 
@@ -151,11 +155,12 @@ publishing {
 //    archives sourcesJar
 //    archives javadocJar
 //}
-artifacts {
-    //archives packageReleaseJar
-    archives androidSourcesJar
-    archives androidJavadocsJar
-}
+//Configures the published artifacts
+//artifacts {
+//    //archives packageReleaseJar
+//    archives androidSourcesJar
+//    archives androidJavadocsJar
+//}
 //signing {
 //   required { project.has("release") && gradle.taskGraph.hasTask("uploadArchives") }
 //  sign configurations.archives
