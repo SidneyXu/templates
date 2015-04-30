@@ -114,6 +114,10 @@ dependencies {
 }
 
 //test
+println project.hasProperty("gradle.properties")
+println project.ext.VERSION_NAME
+println ext.VERSION_NAME
+
 if (project.hasProperty("secure.properties")
         && new File(project.property("secure.properties")).exists()) {
 
@@ -155,7 +159,9 @@ publishing {
 //    archives sourcesJar
 //    archives javadocJar
 //}
+
 //Configures the published artifacts
+
 //artifacts {
 //    //archives packageReleaseJar
 //    archives androidSourcesJar
