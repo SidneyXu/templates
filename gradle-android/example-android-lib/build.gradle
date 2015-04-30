@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'signing'
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -21,32 +23,29 @@ uploadArchives {
     repositories {
         mavenDeployer {
 
-            //test start
-//        beforeDeployment { MavenDeployment deployment->
-//            signing.signPom(deployment)
-//        }
-
-            //test end
-            //then can use project.ext.username
-
-            snapshotRepository(url: "http://127.0.0.1:8081/nexus/content/repositories/snapshots/") {
-                authentication(userName: "admin", password: "admin123")
-            }
-            repository(url: "http://") {
-                authentication(userName: "admin", password: "admin123")
+            beforeDeployment { MavenDeployment deployment ->
+                signing.signPom(deployment)
             }
 
-            pom.version = "1.0.1-SNAPSHOT"
-            pom.artifactId = "android-lib"
-            pom.groupId = "com.example"
-            pom.name = "android lib example"
-            pom.packaging = 'aar'
+            snapshotRepository(url: RESP_SNAPSHOT_URL) {
+                authentication(userName: RESP_SNAPSHOT_USERNAME, password: RESP_SNAPSHOT_PASSWORD)
+            }
+            repository(url: RESP_RELEASE_URL) {
+                authentication(userName: RESP_RELEASE_USERNAME, password: RESP_RELEASE_PASSWORD)
+            }
+
+            pom.artifactId = POM_ARTIFACT_ID
+            pom.groupId = POM_GROUP_ID
+            pom.version = POM_VERSION
 
             pom.project {
                 name POM_NAME
                 description POM_DESCRIPTION
                 packaging POM_PACKAGING
 
+//                groupId POM_GROUP_ID
+//                artifactId POM_ARTIFACT_ID
+//                version POM_VERSION
 //                url 'https://github.com/survivingwithandroid/WeatherLib#sthash.1uutKRow.dpuf'
 
                 inceptionYear POM_INCEPTION_YEAR
@@ -60,13 +59,15 @@ uploadArchives {
                 }
 
                 scm {
-                    url "https://android.googlesource.com/platform/tools/build"
-                    connection "git://android.googlesource.com/platform/tools/build.git"
+                    url POM_SCM_URL
+                    connection POM_SCM_CONNECTION
+                    developerConnection POM_SCM_DEV_CONNECTION
                 }
 
                 developers {
                     developer {
-                        name 'The Android Open Source Project'
+                        id POM_DEVELOPER_ID
+                        name POM_DEVELOPER_NAME
                     }
                 }
             }
@@ -113,19 +114,6 @@ dependencies {
     compile project(":example-java-lib")
 }
 
-//test
-println project.hasProperty("gradle.properties")
-println project.ext.VERSION_NAME
-println ext.VERSION_NAME
-
-if (project.hasProperty("secure.properties")
-        && new File(project.property("secure.properties")).exists()) {
-
-    Properties props = new Properties()
-    props.load(new FileInputStream(file(project.property("secure.properties"))))
-
-}
-
 
 apply plugin: 'maven-publish'
 publishing {
@@ -162,12 +150,34 @@ publishing {
 
 //Configures the published artifacts
 
-//artifacts {
-//    //archives packageReleaseJar
+artifacts {
+//    archives jarRelease
+//    archives javadocrelease
+    //archives packageReleaseJar
 //    archives androidSourcesJar
 //    archives androidJavadocsJar
-//}
+}
 //signing {
 //   required { project.has("release") && gradle.taskGraph.hasTask("uploadArchives") }
 //  sign configurations.archives
+//}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.plugin.getRuntimeJarList().join(File.pathSeparator))
+}
+//
+//task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+//    classifier = 'javadoc'
+//    //basename = artifact_id
+//    from androidJavadocs.destinationDir
+//}
+//
+//task androidSourcesJar(type: Jar) {
+//    classifier = 'sources'
+//    //basename = artifact_id
+//    from android.sourceSets.main.allSource
+//}
+//signing {
+//    sign configurations.archives
 //}

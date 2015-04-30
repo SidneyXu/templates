@@ -17,11 +17,7 @@ allprojects {
 
     repositories {
         maven {
-            credentials {
-                username 'admin'
-                password 'admin123'
-            }
-            url "http://127.0.0.1:8081/nexus/content/repositories/snapshots"
+            url "http://127.0.0.1:8081/nexus/content/groups/public/"
         }
         jcenter()
     }
