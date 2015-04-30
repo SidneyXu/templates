@@ -110,6 +110,10 @@ dependencies {
 }
 
 //test
+println project.hasProperty("gradle.properties")
+println project.ext.VERSION_NAME
+println ext.VERSION_NAME
+
 if (project.hasProperty("secure.properties")
         && new File(project.property("secure.properties")).exists()) {
 
@@ -151,11 +155,11 @@ publishing {
 //    archives sourcesJar
 //    archives javadocJar
 //}
-artifacts {
-    //archives packageReleaseJar
-    archives androidSourcesJar
-    archives androidJavadocsJar
-}
+//artifacts {
+//    //archives packageReleaseJar
+//    archives androidSourcesJar
+//    archives androidJavadocsJar
+//}
 //signing {
 //   required { project.has("release") && gradle.taskGraph.hasTask("uploadArchives") }
 //  sign configurations.archives
