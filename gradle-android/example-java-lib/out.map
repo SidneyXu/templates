@@ -1,0 +1,10 @@
+com.example.java.lib.Address -> com.example.java.lib.a:
+com.example.java.lib.Person -> com.example.java.lib.Person:
+    java.lang.String name -> a
+    30:30:java.lang.String hello() -> hello
+    35:35:java.lang.String toString() -> toString
+com.example.java.lib.Teacher -> com.example.java.lib.Teacher:
+    java.lang.String name -> a
+    18:19:void setName(java.lang.String) -> setName
+    27:27:java.lang.String hello() -> hello
+    32:32:java.lang.String toString() -> toString

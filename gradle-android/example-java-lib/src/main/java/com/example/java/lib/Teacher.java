@@ -3,21 +3,18 @@ package com.example.java.lib;
 /**
  * Created by mrseasons on 2015/4/25.
  */
-public class Person {
+public class Teacher {
 
     /**
      * 姓名
      */
-    private String name;
+    String name;
 
-    private Address address;
-
-    public Person(String name) {
+    Teacher(String name) {
         this.name = name;
-        this.address = new Address();
     }
 
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

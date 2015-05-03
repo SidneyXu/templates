@@ -19,6 +19,7 @@
 #-outjars ../deploy/core-v0.5.jar
 #-libraryjars
 
+-printmapping out.map
 -dontshrink
 
 #-dontoptimize
