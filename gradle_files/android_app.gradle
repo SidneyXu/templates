@@ -75,4 +75,7 @@ dependencies {
 
     //65535
     compile 'com.android.support:multidex:1.0.0'
+
+    //local aar
+    compile(name: 'example-android-lib-debug', ext: 'aar')
 }
