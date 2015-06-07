@@ -22,4 +22,36 @@ allprojects {
         }
         jcenter()
     }
+
 }
+
+subprojects {
+    task hello << {
+        println "hello"+project.name
+    }
+}
+
+//task apiJar(type: Jar) {
+//    baseName "publishing-api"
+//    from sourceSets.main.output
+//    exclude '**/impl/**'
+//}
+//
+//publishing {
+//    publications {
+//        impl(MavenPublication) {
+//            groupId 'org.gradle.sample.impl'
+//            artifactId 'project2-impl'
+//            version '2.3'
+//
+//            from components.java      //from specify
+//        }
+//        api(MavenPublication) {
+//            groupId 'org.gradle.sample'
+//            artifactId 'project2-api'
+//            version '2'
+//
+//            artifact apiJar
+//        }
+//    }
+//}

@@ -125,6 +125,8 @@ publishing {
                 artifactId 'android-lib'
                 version '1.0.1-SNAPSHOT'
                 artifact 'build/outputs/aar/example-android-lib-release.aar'
+
+                from components.java
             }
         }
     }
