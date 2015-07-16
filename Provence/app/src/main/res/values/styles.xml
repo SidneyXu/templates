@@ -1,0 +1,39 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MaterialLike.Base" parent="AppTheme">
+
+        <!--Background color of ToolBar-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+
+        <!-- Background color of Status Bar -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated,
+         which is used to tint widgets -->
+        <item name="colorAccent">#08f0ff</item>
+
+        <!-- Background color of window -->
+        <item name="android:windowBackground">@color/windowBackground</item>
+
+        <!-- Edit Text Style -->
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
+
+        <!-- ActionMode on Toolbar -->
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="EditTextStyle" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:height">@dimen/edit_text_height</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!-- Custom theme -->
+    <style name="MaterialLike" parent="MaterialLike.Base">
+
+    </style>
+</resources>

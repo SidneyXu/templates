@@ -1,0 +1,2 @@
+Guide to publish an aar to maven using gradle
+In this post, I’d like to describe the steps necessary to publish an aar to maven repository. There are other guides that cover this topic and some of the information written here are derived from them, but in this guide I want to describe the process step by step, without covering in detail the gradle aspects but focusing on creating signing key and check the final result. - See more at: http://www.survivingwithandroid.com/2014/05/android-guide-to-publish-aar-to-maven-gradle.html#sthash.1uutKRow.dpuf
