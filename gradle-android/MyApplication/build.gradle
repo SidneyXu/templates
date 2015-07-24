@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.myapp"
-        minSdkVersion 8
+        minSdkVersion 9
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -75,4 +75,32 @@ dependencies {
 
     //65535
     compile 'com.android.support:multidex:1.0.0'
+}
+
+tasks.withType(org.gradle.api.tasks.compile.JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+task generateJavadoc(type: Javadoc) {
+//    source = sourceSets.main.java.srcDirs
+//    source =javaCompile.source
+//    println source.
+
+
+    destinationDir = new File("doc/javadoc")
+    options.setEncoding("UTF-8")
+    ArrayList<File> doclavaPath = new ArrayList<File>()
+    doclavaPath.add(file("libs/doclava.jar"))
+    options.setDocletpath(doclavaPath)
+    options.setDoclet("com.google.doclava.Doclava")
+    ArrayList<File> classPath = new ArrayList<File>()
+    classPath.add(file("$System.env.ANDROID_HOME/platforms/android-21/android.jar"))
+//    classPath.add(file("libs/android-support-v4.jar"))
+    options.classpath(classPath)
+//    options.showFromPrivate()
+    options.bootClasspath(new File('$System.env.JAVA_HOME/jre/lib/rt.jar'))
+    options.optionFiles(file('doc/javadoc.options'))
+    doLast {
+        println 'generating javadoc'
+    }
 }

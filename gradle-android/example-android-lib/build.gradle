@@ -4,13 +4,22 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
 
+    lintOptions {
+        abortOnError false
+    }
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 21
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -81,6 +90,11 @@ android.libraryVariants.all { variant ->
 
         //other
         exclude '**/demo/**'
+
+        ArrayList<File> doclavaPath = new ArrayList<File>()
+        doclavaPath.add(file("libs/doclava.jar"))
+        options.setDocletpath(doclavaPath)
+        options.setDoclet("com.google.doclava.Doclava")
     }
 
     task("javadoc${variant.name}", type: Jar) {
@@ -96,6 +110,34 @@ android.libraryVariants.all { variant ->
 
         exclude '**/R.class', '**/R$*.class', '**/R.html', '**/R.*.html', 'BuildConfig.class'
         exclude '**/test/'
+    }
+}
+
+task generateJavadoc(type: Javadoc) {
+//    source = ['src', 'gen']
+//    source =javaCompile.source
+//    println source.
+
+    println "start"
+
+    destinationDir = new File("doc/javadoc")
+
+    println destinationDir.getAbsolutePath()
+
+    options.setEncoding("UTF-8")
+    ArrayList<File> doclavaPath = new ArrayList<File>()
+    doclavaPath.add(file("libs/doclava.jar"))
+    options.setDocletpath(doclavaPath)
+    options.setDoclet("com.google.doclava.Doclava")
+    ArrayList<File> classPath = new ArrayList<File>()
+    classPath.add(file("$System.env.ANDROID_HOME/platforms/android-21/android.jar"))
+//    classPath.add(file("libs/android-support-v4.jar"))
+    options.classpath(classPath)
+//    options.showFromPrivate()
+    options.bootClasspath(new File('$System.env.JAVA_HOME/jre/lib/rt.jar'))
+    options.optionFiles(file('doc/javadoc.options'))
+    doLast {
+        println 'generating javadoc'
     }
 }
 
@@ -126,7 +168,7 @@ publishing {
                 version '1.0.1-SNAPSHOT'
                 artifact 'build/outputs/aar/example-android-lib-release.aar'
 
-                from components.java
+//                from components.java
             }
         }
     }
