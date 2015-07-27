@@ -75,6 +75,9 @@ dependencies {
 
     //65535
     compile 'com.android.support:multidex:1.0.0'
+
+    //Robolectric
+    androidTestCompile "org.robolectric:robolectric:3.0"
 }
 
 tasks.withType(org.gradle.api.tasks.compile.JavaCompile) {

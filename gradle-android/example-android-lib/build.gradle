@@ -146,6 +146,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
 
     compile project(":example-java-lib")
+
+    testCompile "org.robolectric:robolectric:3.0"
 }
 
 
