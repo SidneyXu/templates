@@ -5,6 +5,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.12.613'
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:0.12.613"
     }
 }
 apply plugin: 'com.android.application'
