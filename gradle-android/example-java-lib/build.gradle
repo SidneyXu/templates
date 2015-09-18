@@ -6,6 +6,9 @@ compileJava.options.encoding = "utf-8"
 compileTestJava.options.encoding = "utf-8"
 javadoc.options.encoding = "utf-8"
 
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
 uploadArchives {
     repositories {
         mavenDeployer {
