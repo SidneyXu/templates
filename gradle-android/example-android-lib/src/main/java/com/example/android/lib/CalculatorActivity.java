@@ -14,6 +14,7 @@ public class CalculatorActivity extends Activity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_calculator);
 
         findViewById(R.id.calc).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,9 +17,10 @@ public class ResultActivity extends Activity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_result);
 
         Intent intent = getIntent();
-        TextView resultTextView = (TextView) findViewById(R.id.text);
+        TextView resultTextView = (TextView) findViewById(R.id.result);
         int result = Calc.add(intent.getIntExtra(EXTRA_NUMBER_1, 0), intent.getIntExtra(EXTRA_NUMBER_2, 0));
         resultTextView.setText("" + result);
     }

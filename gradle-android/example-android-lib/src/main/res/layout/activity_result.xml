@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/result"
+        android:text="0"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
