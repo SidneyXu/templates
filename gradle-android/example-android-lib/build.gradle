@@ -162,6 +162,15 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
 
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.4.1'
+
+    testCompile 'org.powermock:powermock-module-junit4:1.6.2'
+    testCompile "org.powermock:powermock-module-junit4-rule:1.6.2"
+    testCompile 'org.powermock:powermock-api-mockito:1.6.2'
+    testCompile "org.powermock:powermock-classloading-xstream:1.6.2"
+
+    androidTestCompile 'org.mockito:mockito-core:1.9.5'
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
 }
 
 
