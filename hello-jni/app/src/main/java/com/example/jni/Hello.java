@@ -5,7 +5,7 @@ package com.example.jni;
  */
 //http://stackoverflow.com/questions/21096819/jni-and-gradle-in-android-studio
     //http://qiita.com/eaglesakura/items/c4af7989b03904d66ebe
-//http://blog.csdn.net/ashqal/article/details/21869151
+
 public class Hello {
 
     static {
