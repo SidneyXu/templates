@@ -4,9 +4,11 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
+import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -32,5 +34,11 @@ public class EspressoMockTest {
         onView(ViewMatchers.withId(R.id.calc)).perform(click());
 
         onView(ViewMatchers.withId(R.id.result)).check(matches(ViewMatchers.withText("22")));
+        
+        Bean bean = Mockito.mock(Bean.class);
+        Mockito.when(bean.getCount()).thenReturn(100);
+        Assertions.assertThat(bean.getCount()).isEqualTo(100);
+
+
     }
 }

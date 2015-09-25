@@ -156,6 +156,9 @@ dependencies {
 
     testCompile "junit:junit:4.10"
     testCompile "org.robolectric:robolectric:3.0"
+    testCompile 'com.squareup.assertj:assertj-android:1.1.0'
+
+    androidTestCompile 'com.squareup.assertj:assertj-android:1.1.0'
 
     androidTestCompile 'com.android.support.test:runner:0.3'
     androidTestCompile 'com.android.support.test:rules:0.3'

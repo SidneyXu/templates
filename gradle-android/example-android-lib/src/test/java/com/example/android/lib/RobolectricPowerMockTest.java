@@ -16,8 +16,7 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by mrseasons on 2015/09/18.
@@ -43,8 +42,7 @@ public class RobolectricPowerMockTest {
     @Test
     public void sample() {
         Context context = RuntimeEnvironment.application.getApplicationContext();
-        assertThat(
-                context.getString(R.string.app_name), is("example-android-lib"));
+        assertThat(context.getString(R.string.app_name)).isEqualTo("example-android-lib");
     }
 
     @Test
@@ -52,6 +50,6 @@ public class RobolectricPowerMockTest {
         PowerMockito.mockStatic(Calc.class);
         Mockito.when(Calc.add(1, 2)).thenReturn(10);
 
-        assertThat(Calc.add(1, 2), is(10));
+        assertThat(Calc.add(1, 2)).isEqualTo(10);
     }
 }
