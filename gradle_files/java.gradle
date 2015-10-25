@@ -6,54 +6,11 @@ compileJava.options.encoding = "utf-8"
 compileTestJava.options.encoding = "utf-8"
 javadoc.options.encoding = "utf-8"
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
-            beforeDeployment { MavenDeployment deployment ->
-                signing.signPom(deployment)
-            }
-
-            snapshotRepository(url: RESP_SNAPSHOT_URL) {
-                authentication(userName: RESP_SNAPSHOT_USERNAME, password: RESP_SNAPSHOT_PASSWORD)
-            }
-            repository(url: RESP_RELEASE_URL) {
-                authentication(userName: RESP_RELEASE_USERNAME, password: RESP_RELEASE_PASSWORD)
-            }
-
-            pom.artifactId = POM_ARTIFACT_ID
-            pom.groupId = POM_GROUP_ID
-            pom.version = POM_VERSION
-
-            pom.project {
-                name POM_NAME
-                description POM_DESCRIPTION
-                packaging POM_PACKAGING
-                inceptionYear POM_INCEPTION_YEAR
-
-                licenses {
-                    license {
-                        name POM_LICENCE_NAME
-                        url POM_LICENCE_URL
-                        distribution POM_LICENCE_DIST
-                    }
-                }
-
-                scm {
-                    url POM_SCM_URL
-                    connection POM_SCM_CONNECTION
-                    developerConnection POM_SCM_DEV_CONNECTION
-                }
-
-                developers {
-                    developer {
-                        id POM_DEVELOPER_ID
-                        name POM_DEVELOPER_NAME
-                    }
-                }
-            }
-        }
-    }
+repositories {
+    mavenCentral()
 }
 
 task proguard(type: ProGuardTask) {
@@ -82,4 +39,6 @@ jar {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.assertj:assertj-core:1.1.0'
 }

@@ -1,8 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    lintOptions {
+        abortOnError false
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -14,120 +18,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
-
-uploadArchives {
-
-    repositories {
-        mavenDeployer {
-
-            beforeDeployment { MavenDeployment deployment ->
-                signing.signPom(deployment)
-            }
-
-            snapshotRepository(url: RESP_SNAPSHOT_URL) {
-                authentication(userName: RESP_SNAPSHOT_USERNAME, password: RESP_SNAPSHOT_PASSWORD)
-            }
-            repository(url: RESP_RELEASE_URL) {
-                authentication(userName: RESP_RELEASE_USERNAME, password: RESP_RELEASE_PASSWORD)
-            }
-
-            pom.artifactId = POM_ARTIFACT_ID
-            pom.groupId = POM_GROUP_ID
-            pom.version = POM_VERSION
-
-            pom.project {
-                name POM_NAME
-                description POM_DESCRIPTION
-                packaging POM_PACKAGING
-                inceptionYear POM_INCEPTION_YEAR
-
-                licenses {
-                    license {
-                        name POM_LICENCE_NAME
-                        url POM_LICENCE_URL
-                        distribution POM_LICENCE_DIST
-                    }
-                }
-
-                scm {
-                    url POM_SCM_URL
-                    connection POM_SCM_CONNECTION
-                    developerConnection POM_SCM_DEV_CONNECTION
-                }
-
-                developers {
-                    developer {
-                        id POM_DEVELOPER_ID
-                        name POM_DEVELOPER_NAME
-                    }
-                }
-            }
-
-        }
+    dexOptions {
+        incremental true
     }
 
-}
-
-android.libraryVariants.all { variant ->
-    task("generate${variant.name}Javadoc", type: Javadoc) {
-        description "Generates Javadoc for $variant.name."
-        source = variant.javaCompile.source
-        ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
-
-        //android
-        exclude "**/R.java"
-
-        //other
-        exclude '**/demo/**'
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
     }
-
-    task("javadoc${variant.name}", type: Jar) {
-        classifier = "javadoc"
-        description "Bundles Javadoc into a JAR file for $variant.name."
-        from tasks["generate${variant.name}Javadoc"]
-    }
-
-    task("jar${variant.name}", type: Jar) {
-        description "Bundles compiled .class files into a JAR file for $variant.name."
-        dependsOn variant.javaCompile
-        from variant.javaCompile.destinationDir
-
-        exclude '**/R.class', '**/R$*.class', '**/R.html', '**/R.*.html', 'BuildConfig.class'
-        exclude '**/test/'
-    }
-}
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
-
-    compile project(":example-java-lib")
-}
-
-
-apply plugin: 'maven-publish'
-publishing {
-    publications {
-
-        repositories.maven {
-            url "http://127.0.0.1:8081/nexus/content/repositories/snapshots/"
-            credentials {
-                username "admin"
-                password "admin123"
-            }
-        }
-
-        maven(MavenPublication) {
-            artifacts {
-                groupId 'com.example'
-                artifactId 'android-lib'
-                version '1.0.1-SNAPSHOT'
-                artifact 'build/outputs/aar/example-android-lib-release.aar'
-            }
-        }
-    }
-    //snapshot only allow published version name contains snapshot
-
 }
