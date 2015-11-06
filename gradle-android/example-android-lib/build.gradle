@@ -18,6 +18,8 @@ android {
         targetSdkVersion 21
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [bar : "foobar"]
     }
 
     compileOptions {
@@ -203,3 +205,10 @@ publishing {
     //snapshot only allow published version name contains snapshot
 
 }
+
+println VERSION_NAME
+
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+println properties.getProperty("x")

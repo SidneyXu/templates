@@ -6,6 +6,9 @@
                  android:theme="@style/AppTheme">
         <activity android:name=".CalculatorActivity"/>
         <activity android:name=".ResultActivity"/>
+
+        <meta-data android:name="foo"
+                   android:value="${foo}"/>
     </application>
 
 </manifest>
