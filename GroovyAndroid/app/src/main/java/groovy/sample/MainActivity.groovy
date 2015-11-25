@@ -18,7 +18,7 @@ class MainActivity extends AppCompatActivity {
         contentView = R.layout.activity_main
 
         findViewById(android.R.id.button1).onClickListener = {
-            Toast.makeText(this, "Click a button", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Click a button3", Toast.LENGTH_SHORT).show()
         }
 
         findViewById(android.R.id.button2).onClickListener = {
