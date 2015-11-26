@@ -1,5 +1,6 @@
 package groovy.sample
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
@@ -18,11 +19,13 @@ class MainActivity extends AppCompatActivity {
         contentView = R.layout.activity_main
 
         findViewById(android.R.id.button1).onClickListener = {
-            Toast.makeText(this, "Click a button3", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Click a button8", Toast.LENGTH_SHORT).show()
         }
 
         findViewById(android.R.id.button2).onClickListener = {
             println(((TextView) it).getText())
+
+            startActivity(new Intent(this, CountryListActivity.class))
         }
 
     }

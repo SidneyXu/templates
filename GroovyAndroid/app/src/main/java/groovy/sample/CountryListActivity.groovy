@@ -1,6 +1,7 @@
 package groovy.sample
 
 import android.content.Context
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
@@ -12,6 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import groovy.json.JsonSlurper
 import groovy.transform.CompileStatic
+import org.json.JSONArray
+import org.json.JSONObject
 
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -31,7 +34,7 @@ class CountryListActivity extends AppCompatActivity {
         ListView listView = new ListView(this)
         setContentView(listView)
 
-        findCountries { List<String> names, Exception e ->
+        findCountries {  List<String> names, Exception e ->
             listView.post(new Runnable() {
                 @Override
                 void run() {
@@ -39,8 +42,8 @@ class CountryListActivity extends AppCompatActivity {
                         Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                         return
                     }
-                    Apt apt = new Apt(context, names)
-                    listView.adapter = apt
+//                    Apt apt = new Apt(owner as Context, names)
+//                    listView.adapter = apt
                 }
             })
 
@@ -52,11 +55,15 @@ class CountryListActivity extends AppCompatActivity {
             @Override
             void run() {
                 try {
-                    def result = new URL("").getBytes()
-                    def countries = new JsonSlurper().parse(result, "UTF-8") as Map
+                    def result = new URL("https://restcountries.eu/rest/v1/all").getBytes()
+                    def countries = new JsonSlurper().parse(result, "UTF-8")
+
+                    println("coutry is "+countries)
+                    println("count11outry is "+countries as JSONArray)
+
                     List<String> names = []
                     countries.each {
-                        it.name.each { String n ->
+                        it["name"].each { String n ->
                             names << n
                         }
                     }
@@ -66,6 +73,16 @@ class CountryListActivity extends AppCompatActivity {
                 }
             }
         })
+
+//
+//        def asyncTask= [
+//                doInBackground:{params->
+//
+//                },
+//                onPostExecute:{String result->
+//
+//                }
+//        ]as AsyncTask
     }
 
     class Apt extends ArrayAdapter<String> {
