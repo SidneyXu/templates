@@ -32,6 +32,10 @@ android {
     }
     buildTypes {
         release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -43,8 +47,8 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
-        exclude 'META-INF/groovy-release-info.properties'
         exclude 'META-INF/DISCLAIMER'
+        exclude 'META-INF/groovy-release-info.properties'
     }
 
 }

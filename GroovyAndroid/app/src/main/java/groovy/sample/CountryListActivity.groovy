@@ -1,20 +1,15 @@
 package groovy.sample
 
 import android.content.Context
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.AdapterView
 import android.widget.ListView
-import android.widget.TextView
 import android.widget.Toast
 import groovy.json.JsonSlurper
 import groovy.transform.CompileStatic
-import org.json.JSONArray
-import org.json.JSONObject
 
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -26,7 +21,7 @@ import java.util.concurrent.Executors
 class CountryListActivity extends AppCompatActivity {
 
     ExecutorService service = Executors.newSingleThreadExecutor()
-    Context context = this
+    Context context
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -34,16 +29,27 @@ class CountryListActivity extends AppCompatActivity {
         ListView listView = new ListView(this)
         setContentView(listView)
 
-        findCountries {  List<String> names, Exception e ->
+        context = this
+
+        findCountries { List names, Exception e ->
             listView.post(new Runnable() {
                 @Override
                 void run() {
                     if (e) {
-                        Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show()
                         return
                     }
-//                    Apt apt = new Apt(owner as Context, names)
-//                    listView.adapter = apt
+                    Apt apt = new Apt(context, names)
+                    listView.adapter = apt
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        void onItemClick(
+                                final AdapterView<?> parent,
+                                final View view, final int position, final long id) {
+                            Toast.makeText(context, "${names.get(position)}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+
                 }
             })
 
@@ -56,16 +62,11 @@ class CountryListActivity extends AppCompatActivity {
             void run() {
                 try {
                     def result = new URL("https://restcountries.eu/rest/v1/all").getBytes()
-                    def countries = new JsonSlurper().parse(result, "UTF-8")
+                    def countries = new JsonSlurper().parse(result, "UTF-8") as ArrayList
 
-                    println("coutry is "+countries)
-                    println("count11outry is "+countries as JSONArray)
-
-                    List<String> names = []
-                    countries.each {
-                        it["name"].each { String n ->
-                            names << n
-                        }
+                    List names = []
+                    countries.each { country ->
+                        names.add(country["name"])
                     }
                     callback(names, null)
                 } catch (e) {
@@ -73,35 +74,11 @@ class CountryListActivity extends AppCompatActivity {
                 }
             }
         })
-
-//
-//        def asyncTask= [
-//                doInBackground:{params->
-//
-//                },
-//                onPostExecute:{String result->
-//
-//                }
-//        ]as AsyncTask
     }
 
-    class Apt extends ArrayAdapter<String> {
-
-        Apt(final Context context, final List<String> data) {
-            super(context, android.R.layout.simple_list_item_1, android.R.id.text1, data)
-        }
-
-        @Override
-        String getItem(final int position) {
-            return super.getItem(position)
-        }
-
-        @Override
-        View getView(final int position, final View convertView, final ViewGroup parent) {
-            View view = super.getView(position, convertView, parent)
-            def title = view.findViewById(android.R.id.text1) as TextView
-            title.setText(getItem(position))
-            view
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy()
+        service.shutdown
     }
 }

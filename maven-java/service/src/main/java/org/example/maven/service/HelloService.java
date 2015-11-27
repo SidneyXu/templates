@@ -5,7 +5,7 @@ import org.ocpsoft.prettytime.PrettyTime;
 import java.util.Date;
 
 /**
- * Created by mrseasons on 2015/1/24.
+ * Created by SidneyXu on 2015/1/24.
  */
 public class HelloService {
 
