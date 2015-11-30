@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
-import java.util.NoSuchElementException
+import java.util.*
 
 /**
- * Created by mrseasons on 2015/08/04.
+ * Created by SidneyXu on 2015/11/30.
  */
 public class ListActivity : AppCompatActivity() {
 
@@ -33,17 +33,17 @@ public class ListActivity : AppCompatActivity() {
 
         // Set Kotlin TextView to Upper
         val kotlinText = views.first { it ->
-            it is TextView && it.getText().toString().contains("Kotlin")
+            it is TextView && it.text.toString().contains("Kotlin")
         } as TextView
-        kotlinText.setText(kotlinText.getText().toString().toUpperCase())
+        kotlinText.text = kotlinText.text.toString().toUpperCase()
 
         // Set even checkboxes as checked, and odd as unchecked
         views filter {
             it is CheckBox
         } forEach {
             with(it as CheckBox) {
-                val number = getText().toString().removePrefix("Check ").toInt()
-                setChecked(number % 2 == 0)
+                val number = text.toString().removePrefix("Check ").toInt()
+                isChecked = number % 2 == 0
             }
         }
 
