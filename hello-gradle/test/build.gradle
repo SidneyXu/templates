@@ -1,0 +1,20 @@
+buildscript {
+    //  Include local repository
+    repositories {
+        maven {
+            url uri('../repo')
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.test:plugin:1.0-SNAPSHOT'
+    }
+}
+
+//  Using greeting plugin
+apply plugin: 'greeting'
+
+greeting {
+    message = 'Hello'
+    greeter = 'a test module'
+}

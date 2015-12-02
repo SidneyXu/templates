@@ -1,3 +1,4 @@
 rootProject.name = 'GradleSample'
 include 'plugin'
+//include 'test'
 

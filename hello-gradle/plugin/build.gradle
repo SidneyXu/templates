@@ -1,13 +1,9 @@
-group GROUP
-version VERSION
+group "com.test"
+version "1.0-SNAPSHOT"
 
 apply plugin: 'groovy'
+apply plugin: 'maven'
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
 
 repositories {
     mavenCentral()
@@ -16,8 +12,23 @@ repositories {
 
 dependencies {
     compile gradleApi()
-    compile localGroovy()
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile 'org.codehaus.groovy:groovy-all:2.4.4'
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['src/main/groovy']
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
 }
 
 //  include other gradle files
