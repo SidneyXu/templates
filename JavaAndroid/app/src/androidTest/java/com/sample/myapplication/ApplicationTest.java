@@ -1,4 +1,4 @@
-package java.sample;
+package com.sample.myapplication;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
