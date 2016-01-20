@@ -1,6 +1,6 @@
 package com.bookislife.android.sample;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,19 +25,23 @@ public class CountryListActivity extends AppCompatActivity {
     }
 
     private ExecutorService service = Executors.newSingleThreadExecutor();
-    private Context context;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final ListView listView = new ListView(this);
         setContentView(listView);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         findCountries(new FindCallback() {
             @Override
             public void onComplete(final List<String> names, final Exception e) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        progressDialog.dismiss();
                         if (null != e) {
                             Toast.makeText(CountryListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             return;
