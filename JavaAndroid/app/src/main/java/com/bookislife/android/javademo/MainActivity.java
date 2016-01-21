@@ -1,4 +1,4 @@
-package com.bookislife.android.sample;
+package com.bookislife.android.javademo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+/**
+ * Created by SidneyXu on 2016/01/20.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

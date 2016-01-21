@@ -1,5 +1,6 @@
-package groovy.sample
+package com.bookislife.android.groovydemo
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.Nullable
@@ -15,7 +16,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 /**
- * Created by SidneyXu on 2015/11/25.
+ * Created by SidneyXu on 2016/01/20.
  */
 @CompileStatic
 class CountryListActivity extends AppCompatActivity {
@@ -28,13 +29,17 @@ class CountryListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState)
         ListView listView = new ListView(this)
         setContentView(listView)
-
         context = this
+        ProgressDialog progressDialog = new ProgressDialog(this)
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.show()
 
         findCountries { List names, Exception e ->
             listView.post(new Runnable() {
                 @Override
                 void run() {
+                    progressDialog.dismiss()
                     if (e) {
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show()
                         return
@@ -52,7 +57,6 @@ class CountryListActivity extends AppCompatActivity {
 
                 }
             })
-
         }
     }
 

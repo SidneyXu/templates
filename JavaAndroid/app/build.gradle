@@ -9,7 +9,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.bookislife.android.sample"
+        applicationId "com.bookislife.android.javademo"
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1

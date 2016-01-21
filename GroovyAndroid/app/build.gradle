@@ -19,7 +19,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "groovy.sample"
+        applicationId "com.bookislife.android.groovydemo"
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1

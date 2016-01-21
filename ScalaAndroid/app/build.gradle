@@ -23,7 +23,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "scala.sample"
+        applicationId "com.bookislife.android.scalademo"
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1

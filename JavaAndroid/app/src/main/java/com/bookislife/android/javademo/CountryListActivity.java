@@ -1,4 +1,4 @@
-package com.bookislife.android.sample;
+package com.bookislife.android.javademo;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Created by SidneyXu on 2016/01/20.
+ */
 public class CountryListActivity extends AppCompatActivity {
 
     public interface FindCallback {

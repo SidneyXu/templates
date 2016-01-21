@@ -1,4 +1,4 @@
-package groovy.sample
+package com.bookislife.android.groovydemo
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.MenuItem
 import groovy.transform.CompileStatic
 
 /**
- * Created by SidneyXu on 2015/11/25.
+ * Created by SidneyXu on 2016/01/20.
  */
 @CompileStatic
 class MainActivity extends AppCompatActivity {
@@ -33,16 +33,11 @@ class MainActivity extends AppCompatActivity {
 
     @Override
     boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         def id = item.itemId
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            true
+        switch (id) {
+            case R.id.action_settings:
+                break
         }
-
-        super.onOptionsItemSelected(item)
+        true
     }
 }
