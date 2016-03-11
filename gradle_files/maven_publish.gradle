@@ -2,7 +2,7 @@
  *  Usage
  *
  * 1. Includes the following sentences in your build.gradle file.
- * apply from: '../dev_publish.gradle'
+ * apply from: '../maven_publish.gradle'
  *
  * 2a. Publish to nexus
  * gradle -q upload
@@ -11,7 +11,7 @@
  * gradle -q -Penv=pro upload
  *
  * 2c. Publish to local
- * gradle -q -Penv-local upload
+ * gradle -q -Penv=local upload
  */
 
 apply plugin: 'maven'
