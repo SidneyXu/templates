@@ -41,6 +41,7 @@ local.properties
 *.apk
 *.ap_
 *.dex
+*.aar
 
 # IntelliJ specific files/directories
 out
